@@ -1,35 +1,27 @@
 const request = require("request");
 
-class CNPJws {
-  constructor() {
-    this.baseURL = "https://data.cnpj.ws/";
-  }
+module.exports = (cnpj, token) => {
+  cnpj = cnpj.replace(/[^0-9]/g, "");
 
-  consulta(cnpj, token) {
-    cnpj = cnpj.replace(/[^0-9]/g, '')
-    
-    if (!cnpj) throw new Error('CNPJ não informado')
+  if (!cnpj) throw new Error("CNPJ não informado");
 
-    return new Promise((resolve, reject) => {
-      let url = this.baseURL;
+  return new Promise((resolve, reject) => {
+    let url = "https://data.cnpj.ws/";
 
-      if (token) {
-        url = `${url}comercial/${cnpj}`;
-      } else {
-        url = `${url}publica/${cnpj}`;
+    if (token) {
+      url = `${url}comercial/${cnpj}`;
+    } else {
+      url = `${url}publica/${cnpj}`;
+    }
+
+    request(url, (error, res, body) => {
+      if (error) return reject(error);
+
+      try {
+        return resolve(body);
+      } catch (e) {
+        return reject(e);
       }
-
-      request(url, (error, res, body) => {
-        if (error) return reject(error);
-
-        try {
-          return resolve(body);
-        } catch (e) {
-          return reject(e);
-        }
-      });
     });
-  }
-}
-
-module.exports = new CNPJws();
+  });
+};

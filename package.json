@@ -1,6 +1,6 @@
 {
-  "name": "cnpjws",
-  "version": "1.0.0",
+  "name": "consultar-cnpj",
+  "version": "1.0.1",
   "description": "Pacote para consulta de dados de empresas através do CNPJ",
   "main": "src/index.js",
   "scripts": {
@@ -13,5 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "request": "^2.88.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnpj-ws/consultar-cnpj.git"
   }
 }
