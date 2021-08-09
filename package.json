@@ -1,0 +1,17 @@
+{
+  "name": "cnpjws",
+  "version": "1.0.0",
+  "description": "Pacote para consulta de dados de empresas através do CNPJ",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "cnpj"
+  ],
+  "author": "Carlos Tirabassi Jr <carlos@bitize.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
