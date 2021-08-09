@@ -9,9 +9,9 @@ module.exports = (cnpj, token) => {
     let url = "https://data.cnpj.ws/";
 
     if (token) {
-      url = `${url}comercial/${cnpj}`;
+      url = `${url}comercial/cnpj/${cnpj}?token=${token}`;
     } else {
-      url = `${url}publica/${cnpj}`;
+      url = `${url}publica/cnpj/${cnpj}`;
     }
 
     request(url, (error, res, body) => {
