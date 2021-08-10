@@ -1,13 +1,13 @@
 {
   "name": "consultar-cnpj",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Pacote para consulta de dados de empresas através do CNPJ",
   "main": "src/index.js",
   "scripts": {
     "test": "test"
   },
   "keywords": [
-    "cnpj"
+    "cnpj","consulta","cnpjws"
   ],
   "author": "Carlos Tirabassi Jr <carlos@bitize.com.br>",
   "license": "MIT",
