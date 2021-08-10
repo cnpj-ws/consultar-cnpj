@@ -6,7 +6,8 @@
 
 # Consultar CNPJ
 
-Esse pacote permite a consulta da API do CNPJ.ws de maneira gratuita ou utilizando um token que pode ser obtido no site da empresa [CNPJ.ws](www.cnpj.ws)
+Esse pacote permite a consulta da API do CNPJ.ws de maneira gratuita, mas limitada a 4 consultas por minuto 
+ou utilizando um token que pode ser obtido no nosso site: [CNPJ.ws](www.cnpj.ws)
 
 ## Instalação
 
