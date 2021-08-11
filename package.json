@@ -1,6 +1,6 @@
 {
   "name": "consultar-cnpj",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Pacote para consulta de dados de empresas através do CNPJ",
   "main": "src/index.js",
   "scripts": {
