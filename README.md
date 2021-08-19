@@ -29,11 +29,11 @@ O CNPJ.ws possui uma API Pública e uma Comercial, para utilização da API Púb
  mas caso esteja utilizando a API Comercial você deve passar o token como segundo parâmetro na consulta para 
  utilizar os seus benefícios.
 
-```javascript
+```js
 const consultarCNPJ = require('consultar-cnpj')
 
 async function getCNPJ(){
-  const token = process.env.CNPJWS_TOKEN
+  const token = 'INFORME O SEU TOKEN DE ACESSO'
 
   // O Token é opcional
   const empresa = await consultarCNPJ('40154884000153', token)
@@ -47,3 +47,7 @@ getCNPJ()
 
 Utilizando a API do CNPJ.ws você obtém os dados das empresas brasileiras de forma simples e fácil, dê uma 
 olhada em nossa [documentação](https://www.cnpj.ws/docs/intro).
+
+## Contribuindo
+
+Issues e Pull Requests são bem-vindos.
