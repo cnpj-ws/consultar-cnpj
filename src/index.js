@@ -1,4 +1,4 @@
-const request = require("request");
+const axios = require("axios").default;
 
 module.exports = (cnpj, token) => {
   cnpj = cnpj.replace(/[^0-9]/g, "");
@@ -6,22 +6,21 @@ module.exports = (cnpj, token) => {
   if (!cnpj) throw new Error("CNPJ não informado");
 
   return new Promise((resolve, reject) => {
-    let url = "https://data.cnpj.ws/";
+    let url = "";
 
     if (token) {
-      url = `${url}comercial/cnpj/${cnpj}?token=${token}`;
+      url = `https://comercial.cnpj.ws/cnpj/${cnpj}?token=${token}`;
     } else {
-      url = `${url}publica/cnpj/${cnpj}`;
+      url = `https://publica.cnpj.ws/cnpj/${cnpj}`;
     }
 
-    request(url, (error, res, body) => {
-      if (error) return reject(error);
-
-      try {
-        return resolve(body);
-      } catch (e) {
-        return reject(e);
-      }
-    });
+    axios({
+      method: "get",
+      url,
+    })
+      .then((response) => resolve(response.data))
+      .catch((error) => {
+        reject(error.response.data);
+      });
   });
 };
