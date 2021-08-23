@@ -2,7 +2,7 @@ require("dotenv").config({ path: ".env" });
 const consultaCNPJ = require("../src");
 
 describe("Consulta CNPJ - API Comercial", () => {
-  it("Deve retornar o status OK para um CNPJ valido na API Comercial", async () => {
+  it("Deve retornar os dados de um CNPJ valido na API Comercial", async () => {
     const response = await consultaCNPJ(
       "04884082000216",
       process.env.TEST_TOKEN
