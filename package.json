@@ -14,7 +14,7 @@
   "author": "Carlos Tirabassi Jr <carlos@bitize.com.br>",
   "license": "MIT",
   "dependencies": {
-    "request": "^2.88.2"
+    "axios": "^0.21.1"
   },
   "repository": {
     "type": "git",
