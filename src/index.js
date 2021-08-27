@@ -1,4 +1,5 @@
 const axios = require("axios").default;
+const pjson = require('../package.json');
 
 module.exports = (cnpj, token) => {
   cnpj = cnpj.replace(/[^0-9]/g, "");
@@ -17,6 +18,7 @@ module.exports = (cnpj, token) => {
     axios({
       method: "get",
       url,
+      headers: { "User-Agent": `consultar-cnpj/${pjson.version}` },
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
