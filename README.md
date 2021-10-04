@@ -43,6 +43,35 @@ async function getCNPJ(){
 getCNPJ()
 ```
 
+Você também pode consultar o consumo, caso esteja usando um token
+
+```js
+const consultarCNPJ = require('consultar-cnpj')
+
+async function getCNPJ(){
+  const token = 'INFORME O SEU TOKEN DE ACESSO'
+
+  const consumo = await consultarCNPJ.consumo(token)
+  console.log(consumo)
+}
+```
+
+Você também pode informar o ano e o mês: `consultarCNPJ.consumo(token, ano, mes)`
+
+Abaixo o JSON de retorno da consulta de consumo:
+
+```json
+[
+  {
+    "mes": 9,
+    "ano": 2021,
+    "quantidade": 1157,
+    "atualizado_em": "2021-09-30T23:30:32.414Z",
+    "cnpjws_usuario_id": "d046b852-56e7-4da4-beb7-8dccdf11d417"
+  }
+]
+```
+
 ## Conclusão
 
 Utilizando a API do CNPJ.ws você obtém os dados das empresas brasileiras de forma simples e fácil, dê uma 
