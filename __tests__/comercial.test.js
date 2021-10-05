@@ -57,4 +57,12 @@ describe("Consulta CNPJ - API Comercial", () => {
   it("Deve retornar um erro ao consultar consumo sem o token", () => {
     expect(() => consultaCNPJ.consumo()).toThrow(/^Token não informado$/);
   });
+
+  it("Deve retornar o status 200 para uma Raiz de CNPJ valida na API Comercial", async () => {
+    const response = await consultaCNPJ.raiz(
+      "04884082",
+      process.env.TEST_TOKEN
+    );
+    expect(response.data.length).toBeGreaterThan(0);
+  });
 });

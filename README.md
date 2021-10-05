@@ -43,12 +43,52 @@ async function getCNPJ(){
 getCNPJ()
 ```
 
+Você pode fazer uma consulta pela Raiz do CNPJ, que são os primeiros 8 dígitos
+
+```js
+const consultarCNPJ = require('consultar-cnpj')
+
+async function getRaiz(){
+  const token = 'INFORME O SEU TOKEN DE ACESSO'
+
+  const data = await consultarCNPJ.raiz('40154884', token)
+  console.log(empresa)
+}
+
+getCNPJ()
+```
+
+Abaixo o JSON retornado:
+
+```json
+{
+  "data": [
+    "40154884000153",
+    "40154884000234"
+  ],
+  "paginacao": {
+    "limite": 20,
+    "pagina": 1,
+    "paginas": 1,
+    "total": 2
+  },
+  "ordenacao": [],
+  "filtros_disponiveis": [
+    "nome_fantasia",
+    "pais_id",
+    "estado_id",
+    "cidade_id"
+  ],
+  "filtros_aplicados": {}
+}
+```
+
 Você também pode consultar o consumo, caso esteja usando um token
 
 ```js
 const consultarCNPJ = require('consultar-cnpj')
 
-async function getCNPJ(){
+async function getConsumo(){
   const token = 'INFORME O SEU TOKEN DE ACESSO'
 
   const consumo = await consultarCNPJ.consumo(token)
@@ -56,7 +96,7 @@ async function getCNPJ(){
 }
 ```
 
-Você também pode informar o ano e o mês: `consultarCNPJ.consumo(token, ano, mes)`
+Você também pode informar o ano e o mês a serem consultados: `consultarCNPJ.consumo(token, ano, mes)`
 
 Abaixo o JSON de retorno da consulta de consumo:
 
@@ -67,7 +107,7 @@ Abaixo o JSON de retorno da consulta de consumo:
     "ano": 2021,
     "quantidade": 1157,
     "atualizado_em": "2021-09-30T23:30:32.414Z",
-    "cnpjws_usuario_id": "d046b852-56e7-4da4-beb7-8dccdf11d417"
+    "cnpjws_usuario_id": "d046b852-XXXX-XXXX-XXXX-8dccdf11d417"
   }
 ]
 ```
