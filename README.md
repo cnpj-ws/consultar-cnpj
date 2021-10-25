@@ -30,32 +30,37 @@ O CNPJ.ws possui uma API Pública e uma Comercial, para utilização da API Púb
  utilizar os seus benefícios.
 
 ```js
-const consultarCNPJ = require('consultar-cnpj')
+const consultarCNPJ = require("consultar-cnpj");
 
-async function getCNPJ(){
-  const token = 'INFORME O SEU TOKEN DE ACESSO'
+async function getCNPJ() {
+  const token = "INFORME O SEU TOKEN DE ACESSO";
 
-  // O Token é opcional
-  const empresa = await consultarCNPJ('40154884000153', token)
-  console.log(empresa)
+  try {
+    // O Token é opcional
+    const empresa = await consultarCNPJ("40154884000153", token);
+    console.log(empresa);
+  } catch (e) {
+    console.log(e);
+  }
 }
-
-getCNPJ()
 ```
 
-Você pode fazer uma consulta pela Raiz do CNPJ, que são os primeiros 8 dígitos
+Você pode fazer uma consulta pela Raiz do CNPJ (apenas na API Comercial), que são os primeiros 8 dígitos
 
 ```js
-const consultarCNPJ = require('consultar-cnpj')
+const consultarCNPJ = require("consultar-cnpj");
 
-async function getRaiz(){
-  const token = 'INFORME O SEU TOKEN DE ACESSO'
+async function getRaiz() {
+  const token = "INFORME O SEU TOKEN DE ACESSO";
 
-  const data = await consultarCNPJ.raiz('40154884', token)
-  console.log(empresa)
+  try {
+    // O Token é obrigatório
+    const data = await consultarCNPJ.raiz("40154884", token);
+    console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
 }
-
-getCNPJ()
 ```
 
 Abaixo o JSON retornado:
@@ -83,16 +88,21 @@ Abaixo o JSON retornado:
 }
 ```
 
-Você também pode consultar o consumo, caso esteja usando um token
+Você também pode consultar o consumo (apenas na API Comercial), caso esteja usando um token
 
 ```js
-const consultarCNPJ = require('consultar-cnpj')
+const consultarCNPJ = require("consultar-cnpj");
 
-async function getConsumo(){
-  const token = 'INFORME O SEU TOKEN DE ACESSO'
+async function getConsumo() {
+  const token = "INFORME O SEU TOKEN DE ACESSO";
 
-  const consumo = await consultarCNPJ.consumo(token)
-  console.log(consumo)
+  try {
+    // O Token é obrigatório
+    const consumo = await consultarCNPJ.consumo(token);
+    console.log(consumo);
+  } catch (e) {
+    console.log(e);
+  }
 }
 ```
 
