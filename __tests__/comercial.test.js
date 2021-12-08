@@ -70,7 +70,7 @@ describe("Consulta CNPJ - API Comercial", () => {
 
   it("Deve retornar o status 200 para uma pesquisa na API Comercial", async () => {
     const response = await consultaCNPJ.pesquisa(
-      { atividade_principal_id: "6203100" },
+      { atividade_principal_id: "6203100", estado_id: 28 },
       process.env.TEST_TOKEN
     );
     expect(response.data.length).toBeGreaterThan(0);
