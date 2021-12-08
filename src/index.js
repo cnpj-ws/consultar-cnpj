@@ -37,9 +37,9 @@ module.exports.raiz = (raiz, token, options = { page: 1 }) => {
     let url = `https://comercial.cnpj.ws/cnpj-raiz/${raiz}?token=${token}`;
     const opt = ["page", "nome_fantasia", "pais_id", "estado_id", "cidade_id"];
 
-    opt.forEach(option =>{
-      if (options[option]) url = `${url}&${option}=${options[option]}` 
-    })
+    opt.forEach((option) => {
+      if (options[option]) url = `${url}&${option}=${options[option]}`;
+    });
 
     axios({
       method: "get",
@@ -69,6 +69,41 @@ module.exports.consumo = (token, ano, mes) => {
       headers: { "User-Agent": `consultar-cnpj/${pjson.version}` },
     })
       .then((response) => resolve(response.data.data))
+      .catch((error) => {
+        reject(error.response.data);
+      });
+  });
+};
+
+module.exports.pesquisa = (filtros = null, token, page = 1) => {
+  if (!token) throw new Error("Token não informado");
+
+  if (!filtros) throw new Error("Filtros não informados");
+
+  return new Promise((resolve, reject) => {
+    let url = `https://comercial.cnpj.ws/pesquisa?page=${page}&token=${token}`;
+    const fil = [
+      "atividade_principal_id",
+      "natureza_juridica_id",
+      "porte_id",
+      "razao_social",
+      "nome_fantasia",
+      "pais_id",
+      "estado_id",
+      "cidade_id",
+      "cep",
+    ];
+
+    fil.forEach((filtro) => {
+      if (filtros[filtro]) url = `${url}&${filtro}=${filtros[filtro]}`;
+    });
+
+    axios({
+      method: "get",
+      url,
+      headers: { "User-Agent": `consultar-cnpj/${pjson.version}` },
+    })
+      .then((response) => resolve(response.data))
       .catch((error) => {
         reject(error.response.data);
       });

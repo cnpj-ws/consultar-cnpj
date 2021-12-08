@@ -1,6 +1,8 @@
 require("dotenv").config({ path: ".env" });
 const consultaCNPJ = require("../src");
 
+jest.useRealTimers();
+
 describe("Consulta CNPJ - API Comercial", () => {
   it("Deve retornar os dados de um CNPJ valido na API Comercial", async () => {
     const response = await consultaCNPJ(
@@ -61,6 +63,14 @@ describe("Consulta CNPJ - API Comercial", () => {
   it("Deve retornar o status 200 para uma Raiz de CNPJ valida na API Comercial", async () => {
     const response = await consultaCNPJ.raiz(
       "04884082",
+      process.env.TEST_TOKEN
+    );
+    expect(response.data.length).toBeGreaterThan(0);
+  });
+
+  it("Deve retornar o status 200 para uma pesquisa na API Comercial", async () => {
+    const response = await consultaCNPJ.pesquisa(
+      { atividade_principal_id: "6203100" },
       process.env.TEST_TOKEN
     );
     expect(response.data.length).toBeGreaterThan(0);
