@@ -88,6 +88,61 @@ Abaixo o JSON retornado:
 }
 ```
 
+Você pode fazer uma pesquisa na API comercial utilizando os seguintes filtros:
+
+| Campo | Descrição |
+| ----- | --------- |
+|atividade_principal_id|Código CNAE|
+|natureza_juridica_id|Código da Natureza Jurídica|
+|razao_social|Razão Social|
+|nome_fantasia|Nome Fantasia|
+|pais_id|Código do País do BACEN|
+|estado_id|Código IBGE do estado|
+|cidade_id|Código IBGE da Cidade|
+|cep|CEP|
+
+```js
+const consultarCNPJ = require("consultar-cnpj");
+
+async function getPesquisa() {
+  const token = "INFORME O SEU TOKEN DE ACESSO";
+  const page = 2
+
+  try {
+    // O Token é obrigatório
+    const data = await consultarCNPJ.pesquisa({ atividade_principal_id: "6203100", estado_id: 28 }, token, page);
+    console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
+}
+```
+
+Abaixo o JSON retornado:
+
+```json
+{
+  "data": [
+    "40154884000153",
+    "40154884000234"
+  ],
+  "paginacao": {
+    "limite": 20,
+    "pagina": 1,
+    "paginas": 1,
+    "total": 2
+  },
+  "ordenacao": [],
+  "filtros_disponiveis": [
+    "nome_fantasia",
+    "pais_id",
+    "estado_id",
+    "cidade_id"
+  ],
+  "filtros_aplicados": {}
+}
+```
+
 Você também pode consultar o consumo (apenas na API Comercial), caso esteja usando um token
 
 ```js
