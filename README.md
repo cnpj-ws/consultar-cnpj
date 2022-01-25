@@ -26,8 +26,9 @@ npm i consultar-cnpj --save
 ## Utilização
 
 O CNPJ.ws possui uma API Pública e uma Comercial, para utilização da API Pública você não precisa de um token,
- mas caso esteja utilizando a API Comercial você deve passar o token como segundo parâmetro na consulta para 
- utilizar os seus benefícios.
+ mas caso esteja utilizando a API Comercial você deve passar o token como segundo parâmetro na consulta para utilizar os seus benefícios.
+
+Abaixo um exemplo de consulta de CNPJ:
 
 ```js
 const consultarCNPJ = require("consultar-cnpj");
@@ -45,7 +46,43 @@ async function getCNPJ() {
 }
 ```
 
-Você pode fazer uma consulta pela Raiz do CNPJ (apenas na API Comercial), que são os primeiros 8 dígitos
+### Consultar/Validar dados no Suframa
+
+No CNPJ.ws você pode consultar o status de um CNPJ e Inscrição na SUFRAMA, essa consulta está disponível na API Pública (com a limitação de 3 consultas por minuto) e na API Comercial.
+
+Você precisa enviar o CNPJ e o número da inscrição suframa para a consulta:
+
+```js
+const consultarCNPJ = require("consultar-cnpj");
+
+async function validarSuframa() {
+  const token = "INFORME O SEU TOKEN DE ACESSO";
+
+  try {
+    // O Token é opcional
+    const data = await consultarCNPJ.suframa("61940292006682","210140267", token);
+    console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
+}
+```
+
+Abaixo o JSON retornado:
+
+```json
+{
+  "cnpj_raiz": "61940292",
+  "cnpj": "61940292006682",
+  "inscricao_suframa": "210140267",
+  "ativo": true,
+  "atualizado_em": "2022-01-16T12:28:32.384Z"
+}
+```
+
+### Consultar pela Raiz do CNPJ na API Comercial
+
+Você pode fazer uma consulta pela Raiz do CNPJ (apenas na API Comercial), que são os primeiros 8 dígitos.
 
 ```js
 const consultarCNPJ = require("consultar-cnpj");
@@ -87,6 +124,8 @@ Abaixo o JSON retornado:
   "filtros_aplicados": {}
 }
 ```
+
+### Fazer pesquisas na API Comercial
 
 Você pode fazer uma pesquisa na API comercial utilizando os seguintes filtros:
 
@@ -143,6 +182,8 @@ Abaixo o JSON retornado:
 }
 ```
 
+### Consultar o consumo na API Comercial
+
 Você também pode consultar o consumo (apenas na API Comercial), caso esteja usando um token
 
 ```js
@@ -179,8 +220,7 @@ Abaixo o JSON de retorno da consulta de consumo:
 
 ## Conclusão
 
-Utilizando a API do CNPJ.ws você obtém os dados das empresas brasileiras de forma simples e fácil, dê uma 
-olhada em nossa [documentação](https://www.cnpj.ws/docs/intro).
+Utilizando a API do CNPJ.ws você obtém os dados das empresas brasileiras de forma simples e fácil, dê uma olhada em nossa [documentação](https://www.cnpj.ws/docs/intro).
 
 ## Contribuindo
 

@@ -18,4 +18,11 @@ describe("Consulta CNPJ - API Pública", () => {
       expect(e.status).toBe(400);
     }
   });
+
+  it("Deve retornar os dados para uma validacao de dados do Suframa na API Pública", async () => {
+    const response = await consultaCNPJ.suframa(
+      '61940292006682','210140267'
+    );
+    expect(response.cnpj).toBe("61940292006682");
+  });
 });

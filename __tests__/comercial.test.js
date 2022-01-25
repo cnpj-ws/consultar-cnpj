@@ -75,4 +75,11 @@ describe("Consulta CNPJ - API Comercial", () => {
     );
     expect(response.data.length).toBeGreaterThan(0);
   });
+
+  it("Deve retornar o status 200 para uma validacao de dados do Suframa na API Comercial", async () => {
+    const response = await consultaCNPJ.suframa(
+      '61940292006682','210140267',process.env.TEST_TOKEN
+    );
+    expect(response.cnpj).toBe("61940292006682");
+  });
 });

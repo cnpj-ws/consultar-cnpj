@@ -109,3 +109,32 @@ module.exports.pesquisa = (filtros = null, token, page = 1) => {
       });
   });
 };
+
+module.exports.suframa = (cnpj,inscricao, token) => {
+  if (!cnpj) throw new Error("CNPJ não informado");
+
+  if (!inscricao) throw new Error("Inscrição não informada");
+
+  cnpj = cnpj.replace(/[^0-9]/g, "");
+  inscricao = inscricao.replace(/[^0-9]/g, "");
+
+  return new Promise((resolve, reject) => {
+    let url = 'https://publica.cnpj.ws/suframa'
+    
+    if (token)
+     url = `https://comercial.cnpj.ws/suframa?token=${token}`;
+        
+    axios({
+      method: "post",
+      url,
+      headers: { "User-Agent": `consultar-cnpj/${pjson.version}` },
+      data:{
+        cnpj,inscricao
+      }
+    })
+      .then((response) => resolve(response.data))
+      .catch((error) => {
+        reject(error.response.data);
+      });
+  });
+};
