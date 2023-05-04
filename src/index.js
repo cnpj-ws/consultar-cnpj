@@ -84,14 +84,22 @@ module.exports.pesquisa = (filtros = null, token, page = 1) => {
     let url = `https://comercial.cnpj.ws/pesquisa?page=${page}&token=${token}`;
     const fil = [
       "atividade_principal_id",
+      "atividade_secundaria_id",
+      "atividade_id",
       "natureza_juridica_id",
-      "porte_id",
       "razao_social",
       "nome_fantasia",
       "pais_id",
       "estado_id",
       "cidade_id",
       "cep",
+      "situacao_cadastral",
+      "data_situacao_cadastral_de",
+      "data_situacao_cadastral_ate",
+      "porte_id",
+      "socio_nome",
+      "data_inicio_atividade_de",
+      "data_inicio_atividade_ate",
     ];
 
     fil.forEach((filtro) => {
