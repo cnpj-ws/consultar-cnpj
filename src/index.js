@@ -61,7 +61,7 @@ module.exports.consumo = (token, ano, mes) => {
 
     if (ano) url = `${url}&ano=${ano}`;
 
-    if (mes) url = `${url}&mes=${mes}`;
+    if (mes && ano) url = `${url}&mes=${mes}`;
 
     axios({
       method: "get",

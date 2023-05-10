@@ -42,15 +42,15 @@ describe("Consulta CNPJ - API Comercial", () => {
   it("Deve listar o consumo anual", async () => {
     const response = await consultaCNPJ.consumo(
       process.env.TEST_TOKEN,
-      new Date().getFullYear
+      new Date().getFullYear()
     );
     expect(response.length).toBeGreaterThan(0);
   });
 
-  it("Deve listar o consumo anual", async () => {
+  it("Deve listar o consumo mensal", async () => {
     const response = await consultaCNPJ.consumo(
       process.env.TEST_TOKEN,
-      new Date().getFullYear,
+      new Date().getFullYear(),
       new Date().getMonth() + 1
     );
     expect(response.length).toBeGreaterThan(0);
