@@ -75,13 +75,13 @@ module.exports.consumo = (token, ano, mes) => {
   });
 };
 
-module.exports.pesquisa = (filtros = null, token, page = 1) => {
+module.exports.pesquisa = (filtros = null, token, page = 1, limite = 100) => {
   if (!token) throw new Error("Token não informado");
 
   if (!filtros) throw new Error("Filtros não informados");
 
   return new Promise((resolve, reject) => {
-    let url = `https://comercial.cnpj.ws/pesquisa?page=${page}&token=${token}`;
+    let url = `https://comercial.cnpj.ws/pesquisa?page=${page}&limite=${limite}&token=${token}`;
     const fil = [
       "atividade_principal_id",
       "atividade_secundaria_id",
