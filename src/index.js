@@ -22,7 +22,11 @@ module.exports = (cnpj, token) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if (error.response && error.response.data) {
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -48,7 +52,11 @@ module.exports.raiz = (raiz, token, options = { page: 1 }) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if (error.response && error.response.data) {
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -70,7 +78,11 @@ module.exports.consumo = (token, ano, mes) => {
     })
       .then((response) => resolve(response.data.data))
       .catch((error) => {
-        reject(error.response.data);
+        if (error.response && error.response.data) {
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -113,12 +125,16 @@ module.exports.pesquisa = (filtros = null, token, page = 1, limite = 100) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if (error.response && error.response.data) {
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
 
-module.exports.suframa = (cnpj,inscricao, token) => {
+module.exports.suframa = (cnpj, inscricao, token) => {
   if (!cnpj) throw new Error("CNPJ não informado");
 
   if (!inscricao) throw new Error("Inscrição não informada");
@@ -128,21 +144,25 @@ module.exports.suframa = (cnpj,inscricao, token) => {
 
   return new Promise((resolve, reject) => {
     let url = 'https://publica.cnpj.ws/suframa'
-    
+
     if (token)
-     url = `https://comercial.cnpj.ws/suframa?token=${token}`;
-        
+      url = `https://comercial.cnpj.ws/suframa?token=${token}`;
+
     axios({
       method: "post",
       url,
       headers: { "User-Agent": `consultar-cnpj/${pjson.version}` },
-      data:{
-        cnpj,inscricao
+      data: {
+        cnpj, inscricao
       }
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if (error.response && error.response.data) {
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
