@@ -22,7 +22,11 @@ module.exports = (cnpj, token) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if(error.response && error.response.data){
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -48,7 +52,11 @@ module.exports.raiz = (raiz, token, options = { page: 1 }) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if(error.response && error.response.data){
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -70,7 +78,11 @@ module.exports.consumo = (token, ano, mes) => {
     })
       .then((response) => resolve(response.data.data))
       .catch((error) => {
-        reject(error.response.data);
+        if(error.response && error.response.data){
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -113,7 +125,11 @@ module.exports.pesquisa = (filtros = null, token, page = 1, limite = 100) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if(error.response && error.response.data){
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
@@ -142,7 +158,11 @@ module.exports.suframa = (cnpj,inscricao, token) => {
     })
       .then((response) => resolve(response.data))
       .catch((error) => {
-        reject(error.response.data);
+        if(error.response && error.response.data){
+          reject(error.response.data);
+        } else {
+          reject(error);
+        }
       });
   });
 };
