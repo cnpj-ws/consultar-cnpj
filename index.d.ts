@@ -6,15 +6,16 @@ declare function consultarCNPJ(
 declare namespace consultarCNPJ {
   type DateString = string;
 
-  // Subtipos
   interface Porte {
     id: string;
     descricao: string;
   }
+
   interface NaturezaJuridica {
     id: string;
     descricao: string;
   }
+
   interface Qualificacao {
     id: number;
     descricao: string;
@@ -60,7 +61,7 @@ declare namespace consultarCNPJ {
   interface InscricaoEstadual {
     inscricao_estadual: string;
     ativo: boolean;
-    atualizado_em: string;
+    atualizado_em: DateString;
     estado: Estado;
   }
 
@@ -72,11 +73,34 @@ declare namespace consultarCNPJ {
     cpf_representante_legal: string;
     nome_representante: string | null;
     faixa_etaria: string;
-    atualizado_em: string;
+    atualizado_em: DateString;
     pais_id: string;
     qualificacao_socio: Qualificacao;
     qualificacao_representante: Qualificacao | null;
     pais: Pais;
+  }
+
+  interface SimplesMei {
+    simples: "Sim" | "Não" | string;
+    data_opcao_simples: string | null;
+    data_exclusao_simples: string | null;
+    mei: "Sim" | "Não" | string;
+    data_opcao_mei: string | null;
+    data_exclusao_mei: string | null;
+    atualizado_em: DateString;
+  }
+
+  interface InscricaoSuframaEstabelecimento {
+    inscricao_suframa: string;
+    ativo: boolean;
+    atualizado_em: DateString;
+  }
+
+  interface RegimeTributario {
+    ano: number;
+    regime_tributario: string;
+    forma_de_tributacao: string;
+    atualizado_em: DateString;
   }
 
   interface Estabelecimento {
@@ -106,7 +130,7 @@ declare namespace consultarCNPJ {
     email: string | null;
     situacao_especial: string | null;
     data_situacao_especial: string | null;
-    atualizado_em: string;
+    atualizado_em: DateString;
     atividade_principal: Atividade;
     pais: Pais;
     estado: Estado;
@@ -130,23 +154,7 @@ declare namespace consultarCNPJ {
     socios: Socio[];
     simples: SimplesMei | null;
     estabelecimento: Estabelecimento;
-
     [key: string]: unknown;
-  }
-
-  interface RegimeTributario {
-    ano: number;
-    regime_tributario: string;
-    forma_de_tributacao: string;
-    atualizado_em: string;
-  }
-
-  interface SuframaInscricao {
-    cnpj_raiz: string;
-    cnpj: string;
-    inscricao_suframa: string;
-    ativo: boolean;
-    atualizado_em: string;
   }
 
   interface RaizOptions {
@@ -199,31 +207,30 @@ declare namespace consultarCNPJ {
     consultas_serpro: number;
     data_inicio: string;
     data_fim: string;
-    atualizado_em: string;
+    atualizado_em: DateString;
     cnpjws_usuario_id: string;
   }
 
-  interface SimplesMei {
-    simples: "Sim" | "Não" | string;
-    data_opcao_simples: string | null;
-    data_exclusao_simples: string | null;
-    mei: "Sim" | "Não" | string;
-    data_opcao_mei: string | null;
-    data_exclusao_mei: string | null;
-    atualizado_em: string;
+  interface ConsumoResponse {
+    filtros_disponiveis: ("ano" | "mes")[];
+    filtros_aplicados: Record<string, unknown>;
+    ordenacao: ("ano" | "mes")[];
+    data: ConsumoItem[];
   }
 
-  interface InscricaoSuframaEstabelecimento {
+  interface SuframaInscricao {
+    cnpj_raiz: string;
+    cnpj: string;
     inscricao_suframa: string;
     ativo: boolean;
-    atualizado_em: string;
+    atualizado_em: DateString;
   }
 
   function raiz(
     raiz: string,
     token: string,
-    options?: consultarCNPJ.RaizOptions
-  ): Promise<consultarCNPJ.ListaResponse>;
+    options?: RaizOptions
+  ): Promise<ListaResponse>;
 
   function consumo(
     token: string,
@@ -232,17 +239,17 @@ declare namespace consultarCNPJ {
   ): Promise<consultarCNPJ.ConsumoItem[]>;
 
   function pesquisa(
-    filtros: consultarCNPJ.PesquisaFiltros,
+    filtros: PesquisaFiltros,
     token: string,
     page?: number,
     limite?: number
-  ): Promise<consultarCNPJ.ListaResponse>;
+  ): Promise<ListaResponse>;
 
   function suframa(
     cnpj: string,
     inscricao: string,
     token?: string
-  ): Promise<consultarCNPJ.SuframaInscricao>;
+  ): Promise<SuframaInscricao>;
 }
 
 export = consultarCNPJ;
