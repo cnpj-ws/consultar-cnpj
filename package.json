@@ -1,11 +1,12 @@
 {
   "name": "consultar-cnpj",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Pacote para consulta de dados de empresas através do CNPJ",
   "main": "src/index.js",
   "scripts": {
     "test": "jest"
   },
+  "types": "index.d.ts",
   "keywords": [
     "cnpj",
     "consulta",
@@ -27,5 +28,16 @@
     "babel-jest": "^29.7.0",
     "dotenv": "^10.0.0",
     "jest": "^27.0.6"
-  }
+  },
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2019",
+    "module": "CommonJS",
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": [
+    "**/*.js",
+    "**/*.ts"
+  ]
 }
