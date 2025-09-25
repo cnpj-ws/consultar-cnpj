@@ -28,5 +28,16 @@
     "babel-jest": "^29.7.0",
     "dotenv": "^10.0.0",
     "jest": "^27.0.6"
-  }
+  },
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2019",
+    "module": "CommonJS",
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": [
+    "**/*.js",
+    "**/*.ts"
+  ]
 }
