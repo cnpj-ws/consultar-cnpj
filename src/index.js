@@ -1,10 +1,11 @@
 const axios = require("axios").default;
 const pjson = require("../package.json");
+const { normalizarIdentificadorCnpj } = require("./normalizar-cnpj");
 
 module.exports = (cnpj, token) => {
   if (!cnpj) throw new Error("CNPJ não informado");
 
-  cnpj = cnpj.replace(/[^0-9]/g, "");
+  cnpj = normalizarIdentificadorCnpj(cnpj);
 
   return new Promise((resolve, reject) => {
     let url = "";
@@ -35,7 +36,7 @@ module.exports.raiz = (raiz, token, options = { page: 1 }) => {
   if (!raiz) throw new Error("Raiz do CNPJ não informada");
   if (!token) throw new Error("Token não informado");
 
-  raiz = raiz.replace(/[^0-9]/g, "");
+  raiz = normalizarIdentificadorCnpj(raiz);
 
   return new Promise((resolve, reject) => {
     let url = `https://comercial.cnpj.ws/cnpj-raiz/${raiz}?token=${token}`;
@@ -139,7 +140,7 @@ module.exports.suframa = (cnpj, inscricao, token) => {
 
   if (!inscricao) throw new Error("Inscrição não informada");
 
-  cnpj = cnpj.replace(/[^0-9]/g, "");
+  cnpj = normalizarIdentificadorCnpj(cnpj);
   inscricao = inscricao.replace(/[^0-9]/g, "");
 
   return new Promise((resolve, reject) => {
